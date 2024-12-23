@@ -1,4 +1,4 @@
-FROM golang:1.19.2-alpine as unpack
+FROM golang:1.19.2-alpine AS unpack
 WORKDIR /
 
 RUN set -xe \
