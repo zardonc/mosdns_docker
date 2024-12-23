@@ -148,7 +148,8 @@ plugins:
     args:
       concurrent: 1
       upstreams:
-        - addr: "udp://192.168.1.1:53"
+        - addr: "udp://180.168.255.118:53"
+        - addr: "udp://116.228.111.18:53"
 
   # server 失败
   - tag: reject_2
