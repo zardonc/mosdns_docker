@@ -7,40 +7,20 @@ plugins:
       concurrent: 3
       upstreams:
         - addr: "https://dns.google/dns-query"
-          dial_addr: "2001:4860:4860::6464"
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "2001:4860:4860::0064"
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "2001:4860:4860::8844"
+          dial_addr: "8.8.8.8"
+        - addr: "https://dns.adguard-dns.com/dns-query"
+          dial_addr: "94.140.14.14"
         - addr: "https://dns.google/dns-query"
           dial_addr: "2001:4860:4860::8888"
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "8.8.4.4"
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "8.8.8.8"
+        - addr: "https://dns.adguard-dns.com/dns-query"
+          dial_addr: "2a10:50c0::ad1:ff"
 
         - addr: "tls://dns.google"
-          dial_addr: "8.8.4.4"
+          dial_addr: "8.8.8.8"
           enable_pipeline: true # TCP/DoT 启用 RFC 7766 新的 query pipelining 连接复用模式
-        - addr: "tls://dns.google"
-          dial_addr: "2001:4860:4860::8888"
+        - addr: "tls://dns.adguard-dns.com"
+          dial_addr: "94.140.14.14"
           enable_pipeline: true
-        - addr: "tls://dns.google"
-          dial_addr: "8.8.8.8"
-          enable_pipeline: true
-        # h3
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "2001:4860:4860::8844"
-          enable_http3: true
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "8.8.4.4"
-          enable_http3: true
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "2001:4860:4860::8888"
-          enable_http3: true
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "8.8.8.8"
-          enable_http3: true
 
   # cloudflare doh dot h3
   - tag: cloudflare
@@ -49,15 +29,15 @@ plugins:
       concurrent: 3
       upstreams:
         - addr: "https://1.1.1.1/dns-query"
+        - addr: "https://1.0.0.1/dns-query"
+        - addr: "https://dns.cloudflare.com/dns-query"
           dial_addr: "1.1.1.1"
-
-
-        - addr: "tls://1.1.1.1"
-          dial_addr: "1.1.1.1"
-          enable_pipeline: true # TCP/DoT 启用 RFC 7766 新的 query pipelining 连接复用模式
-        - addr: "tls://1.1.1.1"
-          dial_addr: "1.1.1.1"
-          enable_pipeline: true
+        - addr: "https://dns.cloudflare.com/dns-query"
+          dial_addr: "1.0.0.1"
+        - addr: "https://dns.cloudflare.com/dns-query"
+          dial_addr: "2606:4700:4700::1111"
+        - addr: "https://dns.cloudflare.com/dns-query"
+          dial_addr: "2606:4700:4700::1001"
 
   - tag: nextdns
     type: forward
@@ -70,7 +50,6 @@ plugins:
         - addr: "https://dns.nextdns.io"
           dial_addr: "2a07:a8c0::ae:d5cb"
           enable_http3: true
-
         - addr: "tls://dns.nextdns.io"
           enable_pipeline: true
           dial_addr: "45.90.28.186"
@@ -99,7 +78,13 @@ plugins:
       concurrent: 3
       upstreams:
         - addr: "https://dns.alidns.com/dns-query"
+          dial_addr: "223.5.5.5"
+        - addr: "https://dns.alidns.com/dns-query"
           dial_addr: "223.6.6.6"
+        - addr: "https://dns.alidns.com/dns-query"
+          dial_addr: "2400:3200::1"
+        - addr: "https://dns.alidns.com/dns-query"
+          dial_addr: "2400:3200:baba::1"
 
         - addr: "tls://dns.alidns.com"
           dial_addr: "2400:3200:baba::1"
@@ -107,30 +92,24 @@ plugins:
         - addr: "tls://dns.alidns.com"
           dial_addr: "223.5.5.5"
           enable_pipeline: true
-
-        - addr: "https://dns.alidns.com/dns-query"
-          dial_addr: "223.5.5.5"
-          enable_http3: true
-        - addr: "https://dns.alidns.com/dns-query"
+        - addr: "tls://dns.alidns.com"
           dial_addr: "2400:3200::1"
-          enable_http3: true
+          enable_pipeline: true
+        - addr: "tls://dns.alidns.com"
+          dial_addr: "223.6.6.6"
+          enable_pipeline: true
 
   # dnspod doh dot
   - tag: dnspod
     type: forward
     args:
-      concurrent: 3
+      concurrent: 2
       upstreams:
         - addr: "https://doh.pub/dns-query"
-          dial_addr: "1.12.12.12"
-        - addr: "https://doh.pub/dns-query"
-          dial_addr: "120.53.53.53"
+          dial_addr: "119.29.29.29"
 
         - addr: "tls://dot.pub"
-          dial_addr: "1.12.12.12"
-          enable_pipeline: true
-        - addr: "tls://dot.pub"
-          dial_addr: "120.53.53.53"
+          dial_addr: "119.29.29.29"
           enable_pipeline: true
 
   # local dns
