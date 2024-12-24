@@ -71,7 +71,7 @@ plugins:
   - tag: query_cn
     type: sequence
     args:
-      - exec: $ecs_cn
+      - exec: $no_ecs
       - exec: $dns_cn_seq
       - matches: "!resp_ip $geoip_cn" # 响应非 cn ip
         exec: drop_resp # 丢弃
